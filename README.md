@@ -3,8 +3,8 @@
 GigFlow is a full-stack Lead Management Dashboard built using the MERN stack with a clean architecture, robust state management, and a highly responsive professional user experience. It fulfills all the mandatory technical requirements and core features of the Full Stack Internship Assignment.
 
 ## 🚀 Live Demo & Repository
-- **Repository URL:** [[Provide your GitHub URL here](https://github.com/prashant-pandey-4/Gigflow-Smart-Leads-Dashboard)]
-- **Deployment Link:** [[Provide your live link here (if applicable)](https://gigflow-smart-leads-dashboard.vercel.app/)]
+- **Repository URL:** [[ GitHub Repo URL here](https://github.com/prashant-pandey-4/Gigflow-Smart-Leads-Dashboard)]
+- **Deployment Link:** [[live link here](https://gigflow-smart-leads-dashboard.vercel.app/)]
 
 ## 🛠️ Technology Stack
 - **Frontend:** React.js, TypeScript (Strict Mode), TailwindCSS v4, React Router DOM, Axios, Lucide React (Icons).
