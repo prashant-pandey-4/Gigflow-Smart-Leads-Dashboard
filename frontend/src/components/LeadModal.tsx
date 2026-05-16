@@ -51,124 +51,124 @@ export default function LeadModal({ isOpen, onClose, onSubmit, initialData }: Le
   };
 
   return (
-    <div
-      style={{ position: "fixed", inset: 0, zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center" }}
-    >
-      {/* Backdrop */}
-      <div
-        onClick={onClose}
-        style={{ position: "fixed", inset: 0, backgroundColor: "rgba(107, 114, 128, 0.6)" }}
-      />
-
-      {/* Modal Box */}
-      <div
-        style={{
-          position: "relative",
-          backgroundColor: "white",
-          borderRadius: "8px",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
-          padding: "24px",
-          width: "100%",
-          maxWidth: "500px",
-          margin: "16px",
-          zIndex: 1,
-        }}
-      >
-        {/* Close Button */}
-        <button
+    <div className="fixed inset-0 z-9999 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        
+        {/* Backdrop */}
+        <div 
+          className="fixed inset-0 bg-gray-500/75 dark:bg-gray-900/80 transition-opacity" 
+          aria-hidden="true" 
           onClick={onClose}
-          style={{ position: "absolute", top: "12px", right: "12px", background: "none", border: "none", cursor: "pointer", color: "#6b7280" }}
-        >
-          <X size={20} />
-        </button>
+        ></div>
 
-        <h2 style={{ fontSize: "18px", fontWeight: 600, marginBottom: "20px", color: "#111827" }}>
-          {initialData ? "Edit Lead" : "Add New Lead"}
-        </h2>
+        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-        {error && (
-          <div style={{ backgroundColor: "#fef2f2", border: "1px solid #fecaca", color: "#dc2626", padding: "8px 12px", borderRadius: "6px", marginBottom: "16px", fontSize: "14px" }}>
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: "16px" }}>
-            <label style={{ display: "block", fontSize: "14px", fontWeight: 500, color: "#374151", marginBottom: "6px" }}>
-              Name
-            </label>
-            <input
-              type="text"
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              style={{ width: "100%", padding: "8px 12px", border: "1px solid #d1d5db", borderRadius: "6px", fontSize: "14px", outline: "none", boxSizing: "border-box" }}
-              placeholder="Full Name"
-            />
-          </div>
-
-          <div style={{ marginBottom: "16px" }}>
-            <label style={{ display: "block", fontSize: "14px", fontWeight: 500, color: "#374151", marginBottom: "6px" }}>
-              Email
-            </label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              style={{ width: "100%", padding: "8px 12px", border: "1px solid #d1d5db", borderRadius: "6px", fontSize: "14px", outline: "none", boxSizing: "border-box" }}
-              placeholder="email@example.com"
-            />
-          </div>
-
-          <div style={{ marginBottom: "16px" }}>
-            <label style={{ display: "block", fontSize: "14px", fontWeight: 500, color: "#374151", marginBottom: "6px" }}>
-              Status
-            </label>
-            <select
-              value={status}
-              onChange={(e) => setStatus(e.target.value as ILead["status"])}
-              style={{ width: "100%", padding: "8px 12px", border: "1px solid #d1d5db", borderRadius: "6px", fontSize: "14px", outline: "none", boxSizing: "border-box" }}
-            >
-              <option value="New">New</option>
-              <option value="Contacted">Contacted</option>
-              <option value="Qualified">Qualified</option>
-              <option value="Lost">Lost</option>
-            </select>
-          </div>
-
-          <div style={{ marginBottom: "24px" }}>
-            <label style={{ display: "block", fontSize: "14px", fontWeight: 500, color: "#374151", marginBottom: "6px" }}>
-              Source
-            </label>
-            <select
-              value={source}
-              onChange={(e) => setSource(e.target.value as ILead["source"])}
-              style={{ width: "100%", padding: "8px 12px", border: "1px solid #d1d5db", borderRadius: "6px", fontSize: "14px", outline: "none", boxSizing: "border-box" }}
-            >
-              <option value="Website">Website</option>
-              <option value="Instagram">Instagram</option>
-              <option value="Referral">Referral</option>
-            </select>
-          </div>
-
-          <div style={{ display: "flex", justifyContent: "flex-end", gap: "12px" }}>
+        {/* Modal Panel */}
+        <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 border border-transparent dark:border-gray-700">
+          <div className="absolute top-0 right-0 pt-4 pr-4">
             <button
               type="button"
+              className="bg-white dark:bg-gray-800 rounded-md text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none"
               onClick={onClose}
-              style={{ padding: "8px 16px", border: "1px solid #d1d5db", borderRadius: "6px", fontSize: "14px", cursor: "pointer", backgroundColor: "white", color: "#374151" }}
             >
-              Cancel
+              <span className="sr-only">Close</span>
+              <X className="h-6 w-6" aria-hidden="true" />
             </button>
+          </div>
+          
+          <div className="sm:flex sm:items-start">
+            <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
+              <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white" id="modal-title">
+                {initialData ? "Edit Lead" : "Add New Lead"}
+              </h3>
+              <div className="mt-4">
+                <form id="lead-form" onSubmit={handleSubmit} className="space-y-4">
+                  
+                  {error && (
+                    <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-3 py-2 rounded-md text-sm">
+                      {error}
+                    </div>
+                  )}
+
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="mt-1 block w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="mt-1 block w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
+                    <select
+                      id="status"
+                      name="status"
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value as any)}
+                      className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                    >
+                      <option value="New">New</option>
+                      <option value="Contacted">Contacted</option>
+                      <option value="Qualified">Qualified</option>
+                      <option value="Lost">Lost</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="source" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Source</label>
+                    <select
+                      id="source"
+                      name="source"
+                      value={source}
+                      onChange={(e) => setSource(e.target.value as any)}
+                      className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                    >
+                      <option value="Website">Website</option>
+                      <option value="Instagram">Instagram</option>
+                      <option value="Referral">Referral</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
             <button
               type="submit"
+              form="lead-form"
               disabled={loading}
-              style={{ padding: "8px 20px", border: "none", borderRadius: "6px", fontSize: "14px", cursor: loading ? "not-allowed" : "pointer", backgroundColor: loading ? "#a5b4fc" : "#4f46e5", color: "white", fontWeight: 500 }}
+              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 transition-colors"
             >
               {loading ? "Saving..." : "Save Lead"}
             </button>
+            <button
+              type="button"
+              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-700 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-500 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm transition-colors"
+              onClick={onClose}
+            >
+              Cancel
+            </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
