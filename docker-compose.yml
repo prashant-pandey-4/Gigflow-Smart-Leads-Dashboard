@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # Database
+  mongo:
+    image: mongo:latest
+    container_name: gigflow_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - gigflow_net
+
+  # Backend Node.js Server
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: gigflow_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongo:27017/smart-leads-dashboard
+      - JWT_SECRET=your_super_secret_jwt_key
+    depends_on:
+      - mongo
+    networks:
+      - gigflow_net
+
+  # Frontend React App (Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: gigflow_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - gigflow_net
+
+volumes:
+  mongo_data:
+
+networks:
+  gigflow_net:
+    driver: bridge
